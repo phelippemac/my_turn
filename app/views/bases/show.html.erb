@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @basis.code %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @basis.email %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @basis.level %>
+</p>
+
+<p>
+  <strong>Use:</strong>
+  <%= @basis.use %>
+</p>
+
+<%= link_to 'Edit', edit_basis_path(@basis) %> |
+<%= link_to 'Back', bases_path %>

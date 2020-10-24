@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Interval:</strong>
+  <%= @setting.interval %>
+</p>
+
+<p>
+  <strong>Max usage:</strong>
+  <%= @setting.max_usage %>
+</p>
+
+<p>
+  <strong>Initial period:</strong>
+  <%= @setting.initial_period %>
+</p>
+
+<p>
+  <strong>Last period:</strong>
+  <%= @setting.last_period %>
+</p>
+
+<%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Back', settings_path %>
