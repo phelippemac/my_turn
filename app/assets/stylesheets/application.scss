@@ -1,0 +1,65 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap/scss/bootstrap";
+
+ :root {
+  $color1: #5978c8;
+  $color2: #6785d3;
+  $color3: #a3e17d;
+  $color4: #81e288;
+  $color5: #84e4b6;
+
+  --color-background: #84e4b6;
+  --color-dark-01: #5978c8;
+  --color-dark-02: #1b263b;
+  --color-gray-01: #415a77;
+  --color-gray-02: #778da9;
+  --color-white: #ffffff;
+  --color-button: #f6ae2d;
+  font-size: 80%;
+}
+
+*{
+    max-width: 98vw;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body, #root {
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+    background: var(--color-background);
+}
+
+:root{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.white{
+  color: var(--color-white)
+}
+
+a:visited{
+  color: var(--color-white);
+}
+

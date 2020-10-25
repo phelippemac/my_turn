@@ -5,7 +5,6 @@ environment.plugins.apeend('Provide',
     $: 'jquery',
     jQuery: 'jquery',
     popper: ['popper.js', 'default']
-
   })
 )
 export default enviroment 
