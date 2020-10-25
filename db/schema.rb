@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 2020_10_24_140032) do
   end
 
   create_table "settings", force: :cascade do |t|
-    t.integer "interval"
-    t.decimal "max_usage"
-    t.decimal "initial_period"
-    t.decimal "last_period"
+    t.decimal "interval", default: "0.5"
+    t.decimal "max_usage", default: "2.0"
+    t.decimal "initial_period", default: "0.0"
+    t.decimal "last_period", default: "23.0"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2020_10_24_140032) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
-    t.integer "permiss"
+    t.integer "permiss", default: 1
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
