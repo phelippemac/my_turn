@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+p "Criando configurações padrão"
+@setting = Setting.new
+@setting.save
+
+p "Criando usuário Root"
+@user = User.new
+@user.name = 'Root'
+@user.email = 'admin@admin.com'
+@user.permiss = 0
+@user.password_confirmation = 'root123'
+@user.save
