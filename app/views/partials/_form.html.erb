@@ -1,0 +1,17 @@
+<%= form_tag new_appointment_url, method: :get, remote: :true do %>
+  <div class="form-group">
+    <%= label_tag 'Data' %>
+    <%= date_field_tag :hour, '', disabled: :true, class: 'form-control', id: 'date' %>
+  </div>
+  <br>
+  <div class="form-group">
+    <%= label_tag 'Duração do Uso' %>
+    <%= number_field_tag :duration, '', min: 1, max: @max, class: 'form-control', id: 'duration' %>
+  </div>
+  <br>
+  <div class="form-group">
+    <%= label_tag 'Descrição' %>
+    <%= text_field_tag :description, '', class: 'form-control', id: 'description' %>
+  </div>
+  <%= hidden_field_tag :user_id, value: current_user.id %>
+<% end %>

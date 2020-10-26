@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2020_10_24_140032) do
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
-    t.integer "hour"
+    t.date "hour"
     t.decimal "duration"
     t.string "description"
     t.bigint "user_id", null: false

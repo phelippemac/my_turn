@@ -13,12 +13,14 @@ class HomeController < ApplicationController
     user.root? ? @type = 0 : @type = 1
 
     config = Setting.last
+    @max = config.max_usage
     @interval = config.interval.to_f
     @initial_period = config.initial_period.to_f
     @last_period = config.last_period.to_f
     @weekdays = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"]
+    @reservations = Appointment.all
+   
     if params[:new_day].present?
-      p "#######################"
       @today = params[:new_day].to_date
       if @today.monday? || @today.sunday? || @today.saturday?
         rotate = 0
@@ -45,6 +47,14 @@ class HomeController < ApplicationController
         end
         i += @interval
       end
+    end
+  end
+
+  def link
+    @date = params[:date_to]
+    @hour = params[:hour_to]
+    respond_to do |format|
+      format.js
     end
   end
 end

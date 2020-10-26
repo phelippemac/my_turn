@@ -3,25 +3,29 @@
     <thead>
       <th>Horário</th>
       <% dd = 0 %>
+      <% @dates = [] %>
       <% @weekdays.each_with_index do |day, ind| %>
         <% if (@today + dd).saturday? %>
           <% dd += 2%>
         <% elsif (@today + dd).sunday? %>
           <% dd += 1%>
         <% end%>
+        
+        <% @dates << (@today + dd.days).strftime("%d/%m/%Y") %>
         <th class=<%= "#{(@today + dd.days).strftime("%d/%m/%Y")}" %>> <%= "#{day} - #{(@today + dd.days).strftime("%d/%m/%Y")}" %></th>
         <% dd += 1%>
       <% end %>
     </thead>
+    <% p @dates %>
     <tbody>
       <% @period.each do |hour| %>
         <tr class=<%= "#{hour}-time" %>>
           <td> <%="#{hour}"%></td>
-          <td><%= link_to 'Disponível', nil  %></td>
-          <td><%= link_to 'Disponível', nil  %></td>
-          <td><%= link_to 'Disponível', nil  %></td>
-          <td><%= link_to 'Disponível', nil  %></td>
-          <td><%= link_to 'Disponível', nil  %></td>
+          <td><%= link_to 'Disponível', home_link_path(date_to: @dates[0], hour_to: hour), remote: :true ,data: {toggle: 'modal', target: '#exampleModalLong'} %></td>
+          <td><%= link_to 'Disponível', home_link_path(date_to: @dates[1], hour_to: hour), remote: :true ,data: {toggle: 'modal', target: '#exampleModalLong'} %></td>
+          <td><%= link_to 'Disponível', home_link_path(date_to: @dates[2], hour_to: hour), remote: :true ,data: {toggle: 'modal', target: '#exampleModalLong'} %></td>
+          <td><%= link_to 'Disponível', home_link_path(date_to: @dates[3], hour_to: hour), remote: :true ,data: {toggle: 'modal', target: '#exampleModalLong'} %></td>
+          <td><%= link_to 'Disponível', home_link_path(date_to: @dates[4], hour_to: hour), remote: :true ,data: {toggle: 'modal', target: '#exampleModalLong'} %></td>
         </tr>
       <% end %>
     </tbody>
