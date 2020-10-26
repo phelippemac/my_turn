@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 2020_10_24_140032) do
   end
 
   create_table "settings", force: :cascade do |t|
-    t.decimal "interval", default: "0.5"
-    t.decimal "max_usage", default: "2.0"
-    t.decimal "initial_period", default: "0.0"
-    t.decimal "last_period", default: "22.0"
+    t.decimal "interval", default: "1.0"
+    t.decimal "max_usage", default: "1.0"
+    t.decimal "initial_period", default: "6.0"
+    t.decimal "last_period", default: "23.0"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

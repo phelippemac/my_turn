@@ -1,10 +1,12 @@
-import { environment } from '@rails/webpacker'
-import { ProvidePlugin } from 'webpack'
-environment.plugins.apeend('Provide',
-  new ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery',
-    popper: ['popper.js', 'default']
+const { environment } = require('@rails/webpacker')
+
+const webpack = require("webpack")
+
+environment.plugins.prepend('Provide',
+  new webpack.ProvidePlugin({
+    $: 'jquery/src/jquery',
+    jQuery: 'jquery/src/jquery'
   })
 )
-export default enviroment 
+
+module.exports = environment

@@ -1,0 +1,29 @@
+<div class="col-sm-12 col-lg-12">
+  <table class="table table-dark">
+    <thead>
+      <th>Horário</th>
+      <% dd = 0 %>
+      <% @weekdays.each_with_index do |day, ind| %>
+        <% if (@today + dd).saturday? %>
+          <% dd += 2%>
+        <% elsif (@today + dd).sunday? %>
+          <% dd += 1%>
+        <% end%>
+        <th class=<%= "#{(@today + dd.days).strftime("%d/%m/%Y")}" %>> <%= "#{day} - #{(@today + dd.days).strftime("%d/%m/%Y")}" %></th>
+        <% dd += 1%>
+      <% end %>
+    </thead>
+    <tbody>
+      <% @period.each do |hour| %>
+        <tr class=<%= "#{hour}-time" %>>
+          <td> <%="#{hour}"%></td>
+          <td><%= link_to 'Disponível', nil  %></td>
+          <td><%= link_to 'Disponível', nil  %></td>
+          <td><%= link_to 'Disponível', nil  %></td>
+          <td><%= link_to 'Disponível', nil  %></td>
+          <td><%= link_to 'Disponível', nil  %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

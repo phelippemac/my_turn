@@ -8,12 +8,13 @@
 
 p "Criando configurações padrão"
 @setting = Setting.new
-@setting.save
+p "Configurações salvas com sucesso" if @setting.save
 
 p "Criando usuário Root"
 @user = User.new
 @user.name = 'Root'
 @user.email = 'admin@admin.com'
-@user.permiss = 0
+@user.password = 'root123'
 @user.password_confirmation = 'root123'
-@user.save
+@user.permiss = 0
+p "Usuário ROOT criado com sucesso" if @user.save
