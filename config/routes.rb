@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'home/system'
   get 'home/link'
+  get 'home/view'
+  get 'home/edit'
   resources :bases
   resources :settings
   resources :appointments

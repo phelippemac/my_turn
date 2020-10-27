@@ -28,12 +28,13 @@ class AppointmentsController < ApplicationController
 
     respond_to do |format|
       if @appointment.save
-        format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
+        format.html { }
         format.json { render :show, status: :created, location: @appointment }
       else
         format.html { render :new }
         format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
+      format.js { render home_system_path }
     end
   end
 
@@ -48,6 +49,7 @@ class AppointmentsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
+      format.js 
     end
   end
 
@@ -58,6 +60,7 @@ class AppointmentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to appointments_url, notice: 'Appointment was successfully destroyed.' }
       format.json { head :no_content }
+      format.js { render home_system_path }
     end
   end
 
@@ -69,6 +72,6 @@ class AppointmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def appointment_params
-      params.require(:appointment).permit(:hour, :duration, :description, :user_id)
+      params.permit(:day, :hour, :duration, :description, :user_id)
     end
 end

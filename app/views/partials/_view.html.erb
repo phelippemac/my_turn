@@ -1,0 +1,11 @@
+<p>Dia: <%= @res.day %></p>
+<p>Hora: <%= @res.hour %></p>
+<p>Duração: <%= @res.duration %></p>
+<p>Reservado por: <%= @res.user.name %></p>
+<p>Descrição: <%= @res.description %>
+<p>Reservado feita em: <%= @res.created_at %></p>
+<% if @res.user == current_user%>  
+  <%= link_to home_edit_path(id: @res.id), {data: {toggle: 'modal', target: '#cadModal'}, remote: :true, class: 'btn btn-warning btn-sm'}  do %>
+    <i class="fa fa-pencil"></i> Editar
+  <% end %>
+<% end %>

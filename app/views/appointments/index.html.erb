@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Day</th>
       <th>Hour</th>
       <th>Duration</th>
       <th>Description</th>
@@ -16,6 +17,7 @@
   <tbody>
     <% @appointments.each do |appointment| %>
       <tr>
+        <td><%= appointment.day %></td>
         <td><%= appointment.hour %></td>
         <td><%= appointment.duration %></td>
         <td><%= appointment.description %></td>

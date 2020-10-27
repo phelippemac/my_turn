@@ -1,4 +1,4 @@
-<%= form_tag appointments_path, method: :post, remote: :true do %>
+<%= form_tag appointment_path(@res), method: :put, remote: :true do %>
   <div class="form-group">
     <%= label_tag 'Data' %>
     <%= text_field_tag :day, '', readonly: :true, class: 'form-control', id: 'day', value: @date %>
@@ -10,13 +10,17 @@
   <br>
   <div class="form-group">
     <%= label_tag 'Duração do Uso' %>
-    <%= number_field_tag :duration, '', min: 1, max: @max, class: 'form-control', id: 'duration' %>
+    <%= number_field_tag :duration, '', min: 1, max: @max, class: 'form-control', id: 'duration', value: @duration %>
   </div>
   <br>
   <div class="form-group">
     <%= label_tag 'Descrição' %>
-    <%= text_field_tag :description, '', class: 'form-control', id: 'description' %>
+    <%= text_field_tag :description, '', class: 'form-control', id: 'description', value: @description %>
   </div>
   <%= hidden_field_tag :user_id, current_user.id %>
   <%= submit_tag 'Salvar', class: 'btn btn-success'%>
 <% end %>
+
+<script>
+  $("#viewModal").modal('toggle')
+</script>

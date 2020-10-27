@@ -21,11 +21,91 @@
       <% @period.each do |hour| %>
         <tr class=<%= "#{hour}-time" %>>
           <td> <%="#{hour}"%></td>
-          <td><%= link_to 'Disponível', home_link_path(date_to: @dates[0], hour_to: hour), remote: :true ,data: {toggle: 'modal', target: '#exampleModalLong'} %></td>
-          <td><%= link_to 'Disponível', home_link_path(date_to: @dates[1], hour_to: hour), remote: :true ,data: {toggle: 'modal', target: '#exampleModalLong'} %></td>
-          <td><%= link_to 'Disponível', home_link_path(date_to: @dates[2], hour_to: hour), remote: :true ,data: {toggle: 'modal', target: '#exampleModalLong'} %></td>
-          <td><%= link_to 'Disponível', home_link_path(date_to: @dates[3], hour_to: hour), remote: :true ,data: {toggle: 'modal', target: '#exampleModalLong'} %></td>
-          <td><%= link_to 'Disponível', home_link_path(date_to: @dates[4], hour_to: hour), remote: :true ,data: {toggle: 'modal', target: '#exampleModalLong'} %></td>
+          <td>
+            <% unless (user = @reservations.find_by(day: @dates[0], hour: hour)).nil? %>
+              Reservado para <%= user.user.name %>
+              <%= link_to home_view_path(id: user.id), {data: {toggle: 'modal', target: '#viewModal'}, remote: :true, class: 'btn btn-primary btn-sm'}  do %>
+                <i class="fa fa-eye"></i>
+              <% end %>
+              <% if user.user == current_user%>
+              <%= link_to user, method: :delete, data: { confirm: 'Tem Certeza?' }, class: 'btn btn-danger btn-sm', remote: :true  do %>
+                <i class="fa fa-trash"></i>
+              <% end %>
+              <% end%>
+            <% else %>
+              <%= link_to home_link_path(date_to: @dates[0], hour_to: hour), remote: :true ,data: {toggle: 'modal', target: '#cadModal'}, class: 'btn btn-success' do %>
+                <i class="fa fa-plus"></i> Disponível
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% unless (user = @reservations.find_by(day: @dates[1], hour: hour)).nil? %>
+              Reservado para <%= user.user.name %> 
+              <%= link_to home_view_path(id: user.id), {data: {toggle: 'modal', target: '#viewModal'}, remote: :true, class: 'btn btn-primary btn-sm'}  do %>
+                <i class="fa fa-eye"></i>
+              <% end %>
+              <% if user.user == current_user%>
+              <%= link_to user, method: :delete, data: { confirm: 'Tem Certeza?' }, class: 'btn btn-danger btn-sm', remote: :true  do %>
+                <i class="fa fa-trash"></i>
+              <% end %>
+              <% end%>
+            <% else%>
+              <%= link_to home_link_path(date_to: @dates[1], hour_to: hour), remote: :true ,data: {toggle: 'modal', target: '#cadModal'}, class: 'btn btn-success' do %>
+                <i class="fa fa-plus"></i> Disponível
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% unless (user = @reservations.find_by(day: @dates[2], hour: hour)).nil? %>
+              Reservado para <%= user.user.name %> 
+              <%= link_to home_view_path(id: user.id), {data: {toggle: 'modal', target: '#viewModal'}, remote: :true, class: 'btn btn-primary btn-sm'}  do %>
+                <i class="fa fa-eye"></i>
+              <% end %>
+              <% if user.user == current_user%>
+              <%= link_to user, method: :delete, data: { confirm: 'Tem Certeza?' }, class: 'btn btn-danger btn-sm', remote: :true  do %>
+                <i class="fa fa-trash"></i>
+              <% end %>
+              <% end%>
+            <% else%>
+              <%= link_to home_link_path(date_to: @dates[2], hour_to: hour), remote: :true ,data: {toggle: 'modal', target: '#cadModal'}, class: 'btn btn-success' do %>
+                <i class="fa fa-plus"></i> Disponível
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% unless (user = @reservations.find_by(day: @dates[3], hour: hour)).nil? %>
+              Reservado para <%= user.user.name %> 
+              <%= link_to home_view_path(id: user.id), {data: {toggle: 'modal', target: '#viewModal'}, remote: :true, class: 'btn btn-primary btn-sm'}  do %>
+                <i class="fa fa-eye"></i>
+              <% end %>
+              <% if user.user == current_user%>
+              <%= link_to user, method: :delete, data: { confirm: 'Tem Certeza?' }, class: 'btn btn-danger btn-sm', remote: :true  do %>
+                <i class="fa fa-trash"></i>
+              <% end %>
+              <% end%>
+            <% else%>
+              <%= link_to home_link_path(date_to: @dates[3], hour_to: hour), remote: :true ,data: {toggle: 'modal', target: '#cadModal'}, class: 'btn btn-success' do %>
+                <i class="fa fa-plus"></i> Disponível
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% unless (user = @reservations.find_by(day: @dates[4], hour: hour)).nil? %>
+              Reservado para <%= user.user.name %> 
+              <%= link_to home_view_path(id: user.id), {data: {toggle: 'modal', target: '#viewModal'}, remote: :true, class: 'btn btn-primary btn-sm'}  do %>
+                <i class="fa fa-eye"></i>
+              <% end %>
+              <% if user.user == current_user%>
+              <%= link_to user, method: :delete, data: { confirm: 'Tem Certeza?' }, class: 'btn btn-danger btn-sm', remote: :true  do %>
+                <i class="fa fa-trash"></i>
+              <% end %>
+              <% end%>
+            <% else%>
+              <%= link_to home_link_path(date_to: @dates[4], hour_to: hour), remote: :true ,data: {toggle: 'modal', target: '#cadModal'}, class: 'btn btn-success' do %>
+                <i class="fa fa-plus"></i> Disponível
+              <% end %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

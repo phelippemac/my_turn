@@ -26,6 +26,7 @@ gem 'devise'
 # Devise is a flexible authentication solution for Rails based on Warden. It:
 gem 'simple_form'
 # Simple Form aims to be as flexible as possible while helping you with powerful components to create your forms
+gem "font-awesome-rails"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
