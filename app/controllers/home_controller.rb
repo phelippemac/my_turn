@@ -5,10 +5,6 @@ class HomeController < ApplicationController
   def index; end
 
   def system
-    respond_to do |format|
-      format.js
-      format.html
-    end
     user = current_user
     @name = user.name
     user.root? ? @type = 0 : @type = 1
@@ -75,6 +71,18 @@ class HomeController < ApplicationController
 
   def view
     @res = Appointment.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_appoitment_alias
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def delete_appoitment_alias
     respond_to do |format|
       format.js
     end

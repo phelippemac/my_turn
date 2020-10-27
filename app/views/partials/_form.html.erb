@@ -1,4 +1,4 @@
-<%= form_tag appointments_path, method: :post, remote: :true do %>
+<%= form_tag appointments_path, method: :post, remote: :true, format: :js do %>
   <div class="form-group">
     <%= label_tag 'Data' %>
     <%= text_field_tag :day, '', readonly: :true, class: 'form-control', id: 'day', value: @date %>
@@ -18,5 +18,5 @@
     <%= text_field_tag :description, '', class: 'form-control', id: 'description' %>
   </div>
   <%= hidden_field_tag :user_id, current_user.id %>
-  <%= submit_tag 'Salvar', class: 'btn btn-success'%>
+  <%= submit_tag 'Salvar', class: 'btn btn-success' %>
 <% end %>

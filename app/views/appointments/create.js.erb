@@ -1,2 +1,2 @@
 $("#cadModal").modal('toggle')
-$('#d-form').html("<%= j render partial: 'partials/table' %>");
+$('#calendar').html("<%= j render partial: 'partials/table.html.erb', controller: :home_controller, action: :system %>");
