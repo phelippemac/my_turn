@@ -31,7 +31,6 @@ gem 'simple_form'
 - [devise](https://github.com/heartcombo/devise) - Devise is a flexible authentication solution for Rails based on Warden
 - [font-awesome-rails](https://github.com/bokmann/font-awesome-rails) - provides the Font-Awesome web fonts and stylesheets as a Rails engine for use with the asset pipeline.
 gem "font-awesome-rails"
-- [kaminari](https://github.com/kaminari/kaminari) - A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for modern web app frameworks and ORMs
 - [rails-i18n](https://github.com/svenfuchs/rails-i18n) - Centralization of locale data collection for Ruby on Rails.
 
 
@@ -40,11 +39,11 @@ gem "font-awesome-rails"
 Comece clonando este repositório e entrando no diretório criado.
 
 ```bash
-$ git clone https://github.com/phelippemac/rails-note.git
+$ git clone https://github.com/phelippemac/my_turn.git
 $ cd rails-note
 ```
 
-Abra com seu editor de texto favorito e crie um arquivo em *./config* chamado *local_env.yml* com o seguinte conteúdo:
+Abra com seu editor de texto favorito e edite o arquivo em *./config* chamado *local_env.yml* com o seguinte conteúdo:
 
 ```yml
 SAMPLE_APP_DATABASE_USER: '[USUÁRIO DO POSTGRES]'
@@ -55,14 +54,10 @@ SAMPLE_APP_DATABASE_PASSWORD: '[SENHA DO USUÀRIO]'
 Rode então o seguinte comando no terminal:
 
 ```bash
-$ rails db:create db:migrate
+$ rails db:create db:migrate db:seed
 ```
 
-Para criar um admin inicial de E-mail: 'admin@admin' e Senha: 'admin123' para poder acessar áreas restritas da aplicação, rode no terminal:
-
-```bash
-$ rails populate:admin
-```
+O comando anterior criará um usuário Root com Email: 'admin@admin.com' e Senha: 'root123', assim como configurações iniciais.
 
 Posterior a isso, está quase pronto, basta rodar:
 
@@ -75,19 +70,3 @@ $ rails s
 ```
 
 E acessar a aplicação no endereço: *localhost:3000*
-
-## Opcional 
-
- Você pode popular o banco de dados com os seguintes comandos no terminal:
-
- - Criar 50 clientes com informações aleatórias:
-
-```bash
-$ rails populate:customer
-```
-
-- Criar de 1 a 3 contatos para cada cliente existente de forma também aleatória.
-```bash
-$ rails populate:contact
-```
-*Obs: O 'populate:contact' só pode ser rodado depois que houver algum Cliente cadastrado*

@@ -21,7 +21,6 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
 # Devise is a flexible authentication solution for Rails based on Warden. It:
 gem 'devise'
 # Simple Form aims to be as flexible as possible while helping you with powerful components to create your forms
