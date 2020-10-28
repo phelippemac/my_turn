@@ -3,13 +3,13 @@
 </h1>
 
 <h3 align="center">
-  <img src="https://ik.imagekit.io/795unnjv9m/RailsNote_oQ1lUNk5I.png?" height="180">
+  <img src="https://ik.imagekit.io/795unnjv9m/logo_f_sz-Buza.png" height="180">
 </h3>
 
 ## Galeria
 
-<img src="https://ik.imagekit.io/795unnjv9m/tela_cheia_ygkVbSxVcR.gif" height="450">
-<img src="https://ik.imagekit.io/795unnjv9m/tela_mobile_5eDpynqmA.gif" height="400">
+<img src="https://ik.imagekit.io/795unnjv9m/print_eVkPQFQza.png" height="750">
+
 
 ## Sobre
 
