@@ -9,7 +9,7 @@
         <a class="nav-link" href="#">Reservas <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Logoff</a>
+        <%= link_to 'Logoff', destroy_user_session_path, method: :delete, class: 'nav-link' %>
       </li>
     </ul>
   </div>

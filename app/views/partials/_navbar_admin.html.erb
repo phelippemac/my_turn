@@ -9,13 +9,13 @@
         <a class="nav-link" href="#">Reservas <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Configurações</a>
+        <%= link_to 'Configurações', settings_path, class: 'nav-link' %>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Criar Código SingUp</a>
+        <%= link_to 'Criar Cod de Cadastro', new_basis_path, class: 'nav-link' %>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Logoff</a>
+        <%= link_to 'Logoff', destroy_user_session_path, method: :delete, class: 'nav-link' %>
       </li>
     </ul>
   </div>

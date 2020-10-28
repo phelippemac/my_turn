@@ -34,7 +34,7 @@ class AppointmentsController < ApplicationController
         format.html { render :new }
         format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
-      format.js
+      format.js { redirect_to home_system_path }
     end
   end
 
@@ -60,7 +60,7 @@ class AppointmentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to appointments_url, notice: 'Appointment was successfully destroyed.' }
       format.json { head :no_content }
-      format.js { render home_system_path, method: :get }
+      format.js { redirect_to home_system_path }
     end
   end
 

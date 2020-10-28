@@ -27,6 +27,8 @@ gem 'devise'
 gem 'simple_form'
 # Simple Form aims to be as flexible as possible while helping you with powerful components to create your forms
 gem "font-awesome-rails"
+# 
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
