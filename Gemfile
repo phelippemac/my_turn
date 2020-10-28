@@ -22,13 +22,14 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'devise'
 # Devise is a flexible authentication solution for Rails based on Warden. It:
-gem 'simple_form'
+gem 'devise'
 # Simple Form aims to be as flexible as possible while helping you with powerful components to create your forms
+gem 'simple_form'
+#
 gem "font-awesome-rails"
-# 
-
+# Centralization of locale data collection for Ruby on Rails.
+gem 'rails-i18n', '~> 6.0.0' # For 6.0.0 or higher
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
