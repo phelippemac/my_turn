@@ -9,10 +9,6 @@ class Appointment < ApplicationRecord
 
   private
 
-  def expired?
-    day.to_date < Time.now ? true : false
-  end
-
   def ownership
     if user != current_user
       errors.add(:user, 'Um usuário não deve poder mecher na reserva de outro')
