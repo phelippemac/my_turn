@@ -9,19 +9,19 @@ class Appointment < ApplicationRecord
 
   private
 
+  def expired?
+    day.to_date < Time.now ? true : false
+  end
+
   def ownership
     if user != current_user
       errors.add(:user, 'Um usuário não deve poder mecher na reserva de outro')
-    else
-      p "Você é o dono"
     end
   end
 
   def not_past
     if day.past?
       errors.add(:day, 'O dia da reserva não pode ser uma data no passado')
-    else
-      p "Não esta no passado"
     end
   end
 end
