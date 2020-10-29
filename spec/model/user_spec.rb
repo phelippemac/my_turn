@@ -10,8 +10,7 @@ RSpec.describe User, type: :model do
     root.name = 'ROOT'
     root.permiss = 0
     root.save
-    expect(root.permiss).to eq(0)
-    expect(root.id).to eq(1)
+    expect(root.permiss).to eq('root')
   end
 
   it 'É válido quando criado com e-mail, senha, nome e permissão' do
@@ -28,7 +27,7 @@ RSpec.describe User, type: :model do
     user.password = 'user123'
     user.password_confirmation = 'user123'
     user.save
-    expect(user.permiss).to eq(1)
+    expect(user.permiss).to eq('normal')
   end
 
 end

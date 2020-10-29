@@ -1,8 +1,10 @@
 class User < ApplicationRecord
 
+  has_many :appoitments
+
   validates :name, presence: true
 
-  enum permiss:['root', 'normal']
+  enum permiss: ['root', 'normal']
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

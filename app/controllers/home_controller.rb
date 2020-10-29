@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
  
   before_action :authenticate_user!, except: :index
-  respond_to :js, :html 
   
   def index; end
 
@@ -79,18 +78,6 @@ class HomeController < ApplicationController
 
   def view
     @res = Appointment.find(params[:id])
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def create_appoitment_alias
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def delete_appoitment_alias
     respond_to do |format|
       format.js
     end

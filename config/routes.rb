@@ -2,14 +2,10 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/index'
   get 'home/system'
-  get 'home/link'
-  get 'home/view'
-  get 'home/edit'
-
-  # Aliasind methods
-  post 'home/create_appoitment_alias'
-  delete 'home/delete_appoitment_alias'
-
+  patch 'home/link'
+  patch 'home/view'
+  patch 'home/edit'
+  patch 'home/show_message', to: "home#show_message"
   resources :bases
   resources :settings
   resources :appointments
