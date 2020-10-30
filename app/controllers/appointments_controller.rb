@@ -40,7 +40,8 @@ class AppointmentsController < ApplicationController
           format.html { render :new }
           format.json { render json: @appointment.errors, status: :unprocessable_entity }
         end
-        format.js { redirect_to home_system_path }
+        system
+        format.js { render home_system_path }
       end
     end
   end
@@ -71,7 +72,7 @@ class AppointmentsController < ApplicationController
         @appointment.destroy
         format.html { redirect_to appointments_url, notice: 'Reserva cancelada com sucesso.' }
         format.json { head :no_content }
-        format.js { redirect_to home_system_path }
+        format.js { system and render home_system_path}
       else
         format.html { redirect_to appointments_url, notice: 'Houve um erro ao cancelar a reserva.' }
         format.js { render home_show_message_path }
