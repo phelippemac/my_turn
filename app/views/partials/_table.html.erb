@@ -2,18 +2,8 @@
   <table class="table table-dark">
     <thead>
       <th>Horário</th>
-      <% dd = 0 %>
-      <% @dates = [] %>
       <% @weekdays.each_with_index do |day, ind| %>
-        <% if (@today + dd).saturday? %>
-          <% dd += 2%>
-        <% elsif (@today + dd).sunday? %>
-          <% dd += 1%>
-        <% end%>
-        
-        <% @dates << (@today + dd.days).strftime("%d/%m/%Y") %>
-        <th class=<%= "#{(@today + dd.days).strftime("%d/%m/%Y")}" %>> <%= "#{day} - #{(@today + dd.days).strftime("%d/%m/%Y")}" %></th>
-        <% dd += 1%>
+        <th> <%= "#{day} - #{@dates[ind]}" %></th>
       <% end %>
     </thead>
     <tbody>

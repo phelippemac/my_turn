@@ -16,13 +16,12 @@ class HomeController < ApplicationController
     @last_period = config.last_period.to_f
     @weekdays = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"]
     @reservations = Appointment.all
-   
+
     if params[:new_day].present? && ! params[:new_day].blank?
       @today = params[:new_day].to_date
     else
-      @today = Time.now
+      @today = Time.current.strftime('%d/%m/%Y').to_date
     end
-    
     if @today.monday? || @today.sunday? || @today.saturday?
       rotate = 0
     elsif @today.tuesday?
@@ -48,7 +47,17 @@ class HomeController < ApplicationController
       end
       i += @interval
     end
-
+    dd = 0
+    @dates = []
+    @weekdays.each do |_day|
+      if (@today + dd).saturday?
+        dd += 2
+      elsif (@today + dd).sunday?
+        dd += 1
+      end
+      @dates << (@today + dd.days).strftime('%d/%m/%Y')
+      dd += 1
+    end
   end
 
   def link
