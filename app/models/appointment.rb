@@ -7,17 +7,17 @@ class Appointment < ApplicationRecord
   validate :ownership, on: [:update, :destroy]
   validate :not_past, on: [:create, :update]
 
+  before_destroy :ownership, prepend: true do
+    throw(:abort) if errors.present?
+  end
+
   private
 
   def ownership
-    if user != current_user
-      errors.add(:user, 'Um usuário não deve poder mecher na reserva de outro')
-    end
+    errors.add(:user, 'Um usuário não deve poder mexer na reserva de outro') if user != current_user
   end
 
   def not_past
-    if day.past?
-      errors.add(:day, 'O dia da reserva não pode ser uma data no passado')
-    end
+    errors.add(:day, 'O dia da reserva não pode ser uma data no passado') if day.past?
   end
 end
