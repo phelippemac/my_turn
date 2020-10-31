@@ -25,10 +25,39 @@ RSpec.describe Appointment, type: :model do
 
   context 'Referente a criação' do
 
-    it 'A criação da Reserva é válida se tiver Dia, Hora, Descrição' do
-      reserva = Appointment.new
-      reserva.user = User.last
-      expect(reserva.save).to eq(false)
+    context 'Validações' do
+      it 'Aceita criação com Dia, hora e Descrição' do
+        reserva = Appointment.new
+        reserva.day = DATA_PRESENTE
+        reserva.hour = '10:00'
+        reserva.description = 'Teste'
+        reserva.user = User.last
+        expect(reserva.save).to eq(true)
+      end
+
+      it 'Recusa criação sem Dia' do
+        reserva = Appointment.new
+        reserva.hour = '10:00'
+        reserva.description = 'Teste'
+        reserva.user = User.last
+        expect(reserva.save).to eq(false)
+      end
+
+      it 'Recusa criação sem Dia' do
+        reserva = Appointment.new
+        reserva.day = DATA_PRESENTE
+        reserva.description = 'Teste'
+        reserva.user = User.last
+        expect(reserva.save).to eq(false)
+      end
+
+      it 'Recusa criação sem Dia' do
+        reserva = Appointment.new
+        reserva.day = DATA_PRESENTE
+        reserva.hour = '10:00'
+        reserva.user = User.last
+        expect(reserva.save).to eq(false)
+      end
     end
 
     it 'A criação da Reserva é válida se feita a partir da data presente' do
