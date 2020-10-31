@@ -25,7 +25,7 @@ RSpec.describe Appointment, type: :model do
 
   context 'Referente a criação' do
 
-    it 'A criação da Reserva é válida se tiver Dia, Hora, Duração e Descrição' do
+    it 'A criação da Reserva é válida se tiver Dia, Hora, Descrição' do
       reserva = Appointment.new
       reserva.user = User.last
       expect(reserva.save).to eq(false)

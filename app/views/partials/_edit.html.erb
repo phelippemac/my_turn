@@ -9,11 +9,6 @@
   </div>
   <br>
   <div class="form-group">
-    <%= label_tag 'Duração do Uso' %>
-    <%= number_field_tag :duration, '', min: 1, max: @max, class: 'form-control', id: 'duration', value: @duration, required: :true %>
-  </div>
-  <br>
-  <div class="form-group">
     <%= label_tag 'Descrição' %>
     <%= text_field_tag :description, '', class: 'form-control', id: 'description', value: @description, required: :true %>
   </div>

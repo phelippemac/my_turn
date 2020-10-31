@@ -3,7 +3,7 @@ class Appointment < ApplicationRecord
 
   attr_accessor :current_user
 
-  validates_presence_of :day, :hour, :duration, :description
+  validates_presence_of :day, :hour, :description
   validate :ownership, on: [:update, :destroy]
   validate :not_past, on: [:create, :update]
 

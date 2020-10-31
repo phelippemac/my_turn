@@ -7,12 +7,6 @@
     <%= label_tag 'Hora' %>
     <%= text_field_tag :hour, '', readonly: :true, class: 'form-control', id: 'hour', value: @hour %>
   </div>
-  <br>
-  <div class="form-group">
-    <%= label_tag 'Duração do Uso' %>
-    <%= number_field_tag :duration, '', min: 1, max: @max, class: 'form-control', id: 'duration', required: :true %>
-  </div>
-  <br>
   <div class="form-group">
     <%= label_tag 'Descrição' %>
     <%= text_field_tag :description, '', class: 'form-control', id: 'description', required: :true %>
