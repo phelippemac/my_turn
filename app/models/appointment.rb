@@ -3,7 +3,7 @@ class Appointment < ApplicationRecord
 
   attr_accessor :current_user
 
-  validates_presence_of :day, :hour
+  validates_presence_of :day, :hour, :duration, :description
   validate :ownership, on: [:update, :destroy]
   validate :not_past, on: [:create, :update]
 
@@ -18,6 +18,10 @@ class Appointment < ApplicationRecord
   end
 
   def not_past
+    if day.nil?
+      errors.add(:day, 'Impossível calcular a data como nil') 
+      return
+    end
     errors.add(:day, 'O dia da reserva não pode ser uma data no passado') if day.past?
   end
 end

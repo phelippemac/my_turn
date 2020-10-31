@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
 
   private 
-
     def system
     user = current_user
     @name = user.name

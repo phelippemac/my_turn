@@ -2,7 +2,7 @@ class AppointmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
   before_action :free_to_edit, only: [:update]
-  #before_action :free_to_delete, only: [:destroy]
+  before_action :free_to_delete, only: [:destroy]
 
 
   # GET /appointments
@@ -68,7 +68,7 @@ class AppointmentsController < ApplicationController
   def destroy
     @appointment.current_user = current_user
     respond_to do |format|
-      if true
+      if @letty == true
         @appointment.destroy
         format.html { redirect_to appointments_url, notice: 'Reserva cancelada com sucesso.' }
         format.json { head :no_content }

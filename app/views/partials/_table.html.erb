@@ -3,6 +3,7 @@
     <thead>
       <th>Horário</th>
       <% @weekdays.each_with_index do |day, ind| %>
+         <input type="hidden" id="base-date" value=<%=@dates[ind]%>>
         <th> <%= "#{day} - #{@dates[ind]}" %></th>
       <% end %>
     </thead>

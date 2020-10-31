@@ -1,2 +1,8 @@
-$('#cadModal').modal('hide')
-$('#calendar').html("<%= j render partial: 'partials/table', controller: :home_controller, action: :system %>");
+$('#cadModal').modal('hide'); 
+var dateBase = $('input[type=hidden]').val();
+$('#calendar').html("<%= j render partial: 'partials/table' %>");
+/*$.get('/home/system', { new_day: dateBase}, 
+    function(returnedData){
+        $('#calendar').html("<%= j render partial: 'partials/table' %>");
+});*/
+

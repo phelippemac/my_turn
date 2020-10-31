@@ -22,7 +22,7 @@
     </div>
   </div>
   <div class="row" id="calendar">
-    
+    <%= render partial: 'partials/table' %>
   </div>
 </div>
 
@@ -66,9 +66,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  $(document).ready(function(){
-    $('#calendar').html("<%= j render partial: 'partials/table' %>");
-  })
-</script>
