@@ -8,6 +8,10 @@
     <%= text_field_tag :hour, '', readonly: :true, class: 'form-control', id: 'hour', value: @hour %>
   </div>
   <br>
+    <div class="form-group">
+    <%= label_tag 'Duração' %>
+    <%= select_tag :duration, options_for_select([['Uma hora', 1.0], ['Duas horas', 2.0]], @res.duration),  class: 'form-control' %>
+  </div>
   <div class="form-group">
     <%= label_tag 'Descrição' %>
     <%= text_field_tag :description, '', class: 'form-control', id: 'description', value: @description, required: :true %>

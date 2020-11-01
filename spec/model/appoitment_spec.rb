@@ -26,11 +26,12 @@ RSpec.describe Appointment, type: :model do
   context 'Referente a criação' do
 
     context 'Validações' do
-      it 'Aceita criação com Dia, hora e Descrição' do
+      it 'Aceita criação com Dia, Hora, Duração e Descrição' do
         reserva = Appointment.new
         reserva.day = DATA_PRESENTE
         reserva.hour = '10:00'
         reserva.description = 'Teste'
+        reserva.duration = 1.0
         reserva.user = User.last
         expect(reserva.save).to eq(true)
       end
@@ -39,11 +40,12 @@ RSpec.describe Appointment, type: :model do
         reserva = Appointment.new
         reserva.hour = '10:00'
         reserva.description = 'Teste'
+        reserva.duration = 1.0
         reserva.user = User.last
         expect(reserva.save).to eq(false)
       end
 
-      it 'Recusa criação sem Dia' do
+      it 'Recusa criação sem Hora' do
         reserva = Appointment.new
         reserva.day = DATA_PRESENTE
         reserva.description = 'Teste'
@@ -51,7 +53,16 @@ RSpec.describe Appointment, type: :model do
         expect(reserva.save).to eq(false)
       end
 
-      it 'Recusa criação sem Dia' do
+      it 'Recusa criação sem Descrição' do
+        reserva = Appointment.new
+        reserva.day = DATA_PRESENTE
+        reserva.hour = '10:00'
+        reserva.duration = 1.0
+        reserva.user = User.last
+        expect(reserva.save).to eq(false)
+      end
+
+      it 'Recusa criação sem Duração' do
         reserva = Appointment.new
         reserva.day = DATA_PRESENTE
         reserva.hour = '10:00'
@@ -76,6 +87,38 @@ RSpec.describe Appointment, type: :model do
       reserva.hour = '10:00'
       reserva.description = 'Descrição'
       reserva.duration = 1.0
+      reserva.user = User.last
+      expect(reserva.save).to eq(false)
+    end
+
+    it 'O encerramento do uso é igual sua Hora mais sua Duração(Condicional com hora acima de 10)' do
+      reserva = Appointment.new
+      reserva.day = DATA_PRESENTE
+      reserva.hour = '10:00'
+      reserva.description = 'Teste'
+      reserva.duration = 1.0
+      reserva.user = User.last
+      reserva.save
+      expect(reserva.endtime).to eq('11:00')
+    end
+
+    it 'O encerramento do uso é igual sua Hora mais sua Duração(Condicional com hora abaixo de 10)' do
+      reserva = Appointment.new
+      reserva.day = DATA_PRESENTE
+      reserva.hour = '06:00'
+      reserva.description = 'Teste'
+      reserva.duration = 2.0
+      reserva.user = User.last
+      reserva.save
+      expect(reserva.endtime).to eq('08:00')
+    end
+
+    it 'A hora do encerramento não deve ultrapassar meia noite' do
+      reserva = Appointment.new
+      reserva.day = DATA_PRESENTE
+      reserva.hour = '23:00'
+      reserva.description = 'Descrição'
+      reserva.duration = 2.0
       reserva.user = User.last
       expect(reserva.save).to eq(false)
     end
