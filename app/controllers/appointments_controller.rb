@@ -26,7 +26,6 @@ class AppointmentsController < ApplicationController
   # POST /appointments.json
   def create
     @appointment = Appointment.new(appointment_params)
-    free_range(@appointment)
     if @appointment.day.to_date.past?
       format.js { redirect_to home_system_path, notice: 'A reserva não pode ser feita com data passada'}
     else
@@ -95,7 +94,7 @@ class AppointmentsController < ApplicationController
     # cond1 refere-se a quem pode editar a reserva
     cond1 = @appointment.user == current_user
     # cond2 refere-se a reserva só poder ser editada-antes de sua data acontecer
-    cond2 = @appointment.day.past?
+    cond2 = !@appointment.day.past?
     @letty = cond1 && cond2
   end
 
@@ -103,14 +102,17 @@ class AppointmentsController < ApplicationController
     # cond1 refere-se a quem pode deletar a reserva
     cond1 = @appointment.user == current_user
     # cond2 refere-se a reserva só poder ser deletada-antes de sua data acontecer
-    cond2 = @appointment.day.to_date.past?
+    cond2 = !@appointment.day.to_date.past?
     @letty = cond1 && cond2
   end
 
-  def free_range(obj)
-    reserva = Appointment.where(day: obj.day)
-    reserva.each do |day|
-      p "Dia : #{day.day} e Hora: #{day.hour} - Seu range é : #{day.range}"
-    end
-  end
+  #def free_range(obj)
+  #  reserva = Appointment.where(day: obj.day)
+  #  restrict = 0
+  #  reserva.each do |day|
+  #    restrict += 1 if day.range.include?(obj.hour)
+  #  end
+  # @letty = restrict.zero?
+  #end
+
 end

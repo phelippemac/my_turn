@@ -18,9 +18,9 @@
                 <i class="fa fa-eye"></i>
               <% end %>
               <% if user.user == current_user%>
-              <%= link_to user, method: :delete, data: { confirm: 'Tem Certeza?' }, class: 'btn btn-danger btn-sm', remote: :true  do %>
-                <i class="fa fa-trash"></i>
-              <% end %>
+                <%= link_to user, method: :delete, data: { confirm: 'Tem Certeza?' }, class: 'btn btn-danger btn-sm', remote: :true  do %>
+                  <i class="fa fa-trash"></i>
+                <% end %>
               <% end%>
             <% else %>
               <%= link_to home_link_path(date_to: @dates[0], hour_to: hour), remote: :true, method: :patch ,data: {toggle: 'modal', target: '#cadModal'}, class: 'btn btn-success' do %>

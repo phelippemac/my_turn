@@ -7,6 +7,7 @@ class Appointment < ApplicationRecord
   validate :ownership, on: [:update, :destroy]
   validate :not_past, on: [:create, :update]
   validate :set_end_time
+  validate :free_range
   before_create :set_end_time
 
   before_destroy :ownership, prepend: true do
@@ -28,7 +29,7 @@ class Appointment < ApplicationRecord
     duration.to_i.times do |step|
       range << parse_range(hour[0..1].to_i + step)
     end
-    range << parse_range(range.last[0..1].to_i + 1)
+    range
   end
 
   def parse_range(num)
@@ -70,4 +71,13 @@ class Appointment < ApplicationRecord
     end
     errors.add(:endtime, 'A hora final não pode ultrapassar meia noite') if endtime[0..1].to_i > 24
   end
+
+  def free_range
+    reserva = Appointment.where(day: day).where.not(id: id)
+    restrict = 0
+    reserva.each do |day|
+      restrict += 1 if day.range.include?(hour)
+    end
+    errors.add(:renge, 'Os horarios de uso da sala não devem bater') unless restrict.zero?
+  end 
 end

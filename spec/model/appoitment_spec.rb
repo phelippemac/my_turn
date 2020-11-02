@@ -123,11 +123,26 @@ RSpec.describe Appointment, type: :model do
       expect(reserva.save).to eq(false)
     end
 
-    it "O tempo da reserva não pode bater com o horário de outra" do
+    it 'Deve retornar o intervalo de tempo que a reserva usará' do
       reserva = create_appointment(DATA_PRESENTE)
       reserva.update_attribute(:hour, '08:00')
       reserva.update_attribute(:duration, 3.0)
-      expect(reserva.range).to eq(['08:00', '09:00', '10:00', '11:00'])
+      expect(reserva.range).to eq(['08:00', '09:00', '10:00'])
+    end
+
+    it 'Uma reserva não deve colidir com a outra em questão de tempo' do
+      reserva1 = create_appointment(DATA_PRESENTE)
+      reserva1.update_attribute(:hour, '08:00')
+      reserva1.update_attribute(:duration, 3.0)
+
+      reserva = Appointment.new
+      reserva.day = DATA_PRESENTE
+      reserva.hour = '10:00'
+      reserva.description = 'Descrição'
+      reserva.duration = 2.0
+      reserva.user = User.last
+
+      expect(reserva.save).to eq(false)
     end
   end
 
@@ -152,13 +167,13 @@ RSpec.describe Appointment, type: :model do
       reserva = create_appointment(DATA_PRESENTE)
       reserva.current_user = reserva.user
       reserva.save
-      expect{ reserva.destroy }.to change(Appointment, :count).by(-1)
+      expect{ reserva.destroy! }.to change(Appointment, :count).by(-1)
     end
 
     it 'A exclusão da reserva não pode ser feita por outro usuário senão aquele que a criou' do
       reserva = create_appointment(DATA_PRESENTE)
       reserva.current_user = 0
-      expect{ reserva.destroy }.to change(Appointment, :count).by(0)
+      expect{ reserva.destroy! }.to change(Appointment, :count).by(0)
     end
 
     it 'A exclusão da reserva só pode ser feita caso sua data não tenha passado' do
