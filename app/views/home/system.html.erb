@@ -58,7 +58,7 @@
         </button>
       </div>
       <div class="modal-body" id="d-view">
-        
+        <%= render partial: 'partials/table' %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -66,9 +66,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  $(document).ready(function(){
-    $("#calendar").html("<%= j render partial: 'partials/table' %>")
-  })
-</script>

@@ -4,10 +4,10 @@ class Appointment < ApplicationRecord
   attr_accessor :current_user
 
   validates_presence_of :day, :hour, :duration, :description
-  validate :ownership, on: [:update, :destroy]
+  validate :ownership, on: [:update]
   validate :not_past, on: [:create, :update]
   validate :set_end_time
-  validate :free_range
+  validate :free_range, on: [:create, :update]
   before_create :set_end_time
 
   before_destroy :ownership, prepend: true do
@@ -53,7 +53,7 @@ class Appointment < ApplicationRecord
     end
     accepted_endtime
   end
-  
+
   def ownership
     errors.add(:user, 'Um usuário não deve poder mexer na reserva de outro') if user != current_user
   end
@@ -78,8 +78,10 @@ class Appointment < ApplicationRecord
     reserva = Appointment.where(day: day).where.not(id: id)
     restrict = 0
     reserva.each do |day|
-      restrict += 1 if day.range.include?(hour)
+      range.each do |r|
+        restrict += 1 if day.range.include?(r)
+      end
     end
-    errors.add(:renge, 'Os horarios de uso da sala não devem bater') unless restrict.zero?
+    errors.add(:range, 'Os horarios de uso da sala não devem bater') unless restrict.zero?
   end 
 end

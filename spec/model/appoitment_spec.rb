@@ -19,8 +19,8 @@ RSpec.describe Appointment, type: :model do
   end
 
   before(:each) do
-    User.create(name: 'João', email: 'joao@gmail.com', password: '123', password_confirmation: '123')
-    User.create(name: 'Phelippe', email: 'phelippe@gmail.com', password: '123', password_confirmation: '123')
+    User.create!(name: 'João', email: 'joao@gmail.com', password: '123456', password_confirmation: '123456')
+    User.create!(name: 'Phelippe', email: 'phelippe@gmail.com', password: '123456', password_confirmation: '123456')
   end
 
   context 'Referente a criação' do
@@ -144,6 +144,21 @@ RSpec.describe Appointment, type: :model do
 
       expect(reserva.save).to eq(false)
     end
+
+    it 'Uma reserva não deve colidir com a outra em questão de tempo mesmo que seja criado em horário antes' do
+      reserva1 = create_appointment(DATA_PRESENTE)
+      reserva1.update_attribute(:hour, '10:00')
+      reserva1.update_attribute(:duration, 1.0)
+
+      reserva = Appointment.new
+      reserva.day = DATA_PRESENTE
+      reserva.hour = '09:00'
+      reserva.description = 'Descrição'
+      reserva.duration = 2.0
+      reserva.user = User.last
+
+      expect(reserva.save).to eq(false)
+    end
   end
 
   context 'Referente a edição' do
@@ -166,20 +181,19 @@ RSpec.describe Appointment, type: :model do
     it 'A exclusão da reserva só pode ser feita pelo usuário que a criou' do
       reserva = create_appointment(DATA_PRESENTE)
       reserva.current_user = reserva.user
-      reserva.save
-      expect{ reserva.destroy! }.to change(Appointment, :count).by(-1)
+      reserva.save!
+      expect{ reserva.destroy }.to change(Appointment, :count).by(-1)
     end
 
     it 'A exclusão da reserva não pode ser feita por outro usuário senão aquele que a criou' do
       reserva = create_appointment(DATA_PRESENTE)
-      reserva.current_user = 0
-      expect{ reserva.destroy! }.to change(Appointment, :count).by(0)
+      reserva.current_user = User.first
+      expect{ reserva.destroy }.to change(Appointment, :count).by(0)
     end
 
     it 'A exclusão da reserva só pode ser feita caso sua data não tenha passado' do
       reserva = create_appointment(DATA_PRESENTE)
       reserva.update_attribute(:day, DATA_PASSADA)
-      reserva.destroy
       expect { reserva.destroy }.to change(Appointment, :count).by(0)
     end
   end

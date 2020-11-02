@@ -31,15 +31,15 @@ RSpec.describe HomeController, type: :controller do
     end
     it 'Retorna resultado sem a variavel new_day' do
       get :system
-      expect(assigns(:reservations)).to eq(Appointment.all)
       expect(assigns(:today).strftime('%d/%m/%Y')).to eq(Time.current.strftime('%d/%m/%Y'))
+      expect(assigns(:reservations)).to eq(Appointment.in_range(assigns(:today)))
       expect(assigns(:weekdays)).to eq(rotate(assigns(:weekdays), assigns(:today)))
       expect(assigns(:dates)).to eq(find_dates(assigns(:weekdays), assigns(:today)))
     end
     it 'Retorna outros resultados com a variavel new_day' do
       get :system, params: {new_day: '01/12/2020'}
-      expect(assigns(:reservations)).to eq(Appointment.all)
       expect(assigns(:today).strftime('%d/%m/%Y')).to eq('01/12/2020')
+      expect(assigns(:reservations)).to eq(Appointment.in_range(assigns(:today)))
       expect(assigns(:weekdays)).to eq(['Terça', 'Quarta', 'Quinta', 'Sexta', 'Segunda'])
       expect(assigns(:dates)).to eq(['01/12/2020', '02/12/2020', '03/12/2020', '04/12/2020', '07/12/2020'])
     end
