@@ -122,6 +122,13 @@ RSpec.describe Appointment, type: :model do
       reserva.user = User.last
       expect(reserva.save).to eq(false)
     end
+
+    it "O tempo da reserva não pode bater com o horário de outra" do
+      reserva = create_appointment(DATA_PRESENTE)
+      reserva.update_attribute(:hour, '08:00')
+      reserva.update_attribute(:duration, 3.0)
+      expect(reserva.range).to eq(['08:00', '09:00', '10:00', '11:00'])
+    end
   end
 
   context 'Referente a edição' do
@@ -139,7 +146,7 @@ RSpec.describe Appointment, type: :model do
       expect(reserva.save).to eq(false)
     end
   end
-  
+
   context 'Referente a exclusão' do
     it 'A exclusão da reserva só pode ser feita pelo usuário que a criou' do
       reserva = create_appointment(DATA_PRESENTE)
@@ -158,7 +165,7 @@ RSpec.describe Appointment, type: :model do
       reserva = create_appointment(DATA_PRESENTE)
       reserva.update_attribute(:day, DATA_PASSADA)
       reserva.destroy
-      expect{ reserva.destroy }.to change(Appointment, :count).by(0)
+      expect { reserva.destroy }.to change(Appointment, :count).by(0)
     end
   end
 end

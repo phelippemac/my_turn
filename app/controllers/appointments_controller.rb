@@ -4,7 +4,6 @@ class AppointmentsController < ApplicationController
   before_action :free_to_edit, only: [:update]
   before_action :free_to_delete, only: [:destroy]
 
-
   # GET /appointments
   # GET /appointments.json
   def index
@@ -13,8 +12,7 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/1
   # GET /appointments/1.json
-  def show
-  end
+  def show; end
 
   # GET /appointments/new
   def new
@@ -22,28 +20,27 @@ class AppointmentsController < ApplicationController
   end
 
   # GET /appointments/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /appointments
   # POST /appointments.json
   def create
     @appointment = Appointment.new(appointment_params)
+    free_range(@appointment)
     if @appointment.day.to_date.past?
-      format.js { redirect_to home_system_path,  notice: 'A reserva não pode ser feita com data passada'}
+      format.js { redirect_to home_system_path, notice: 'A reserva não pode ser feita com data passada'}
     else
       respond_to do |format|
         system
         if @appointment.save
-          format.html { }
+          format.html {}
           format.json { render :show, status: :created, location: @appointment }
-          format.js { render home_system_path, :locals => {msg: 'reserva_success'} }
+          format.js { render home_system_path, locals: {msg: 'reserva_success'} }
         else
           format.html { render :new }
           format.json { render json: @appointment.errors, status: :unprocessable_entity }
-          format.js { render home_system_path, :locals => {msg: 'reserva_error'} }
+          format.js { render home_system_path, locals: {msg: 'reserva_error'} }
         end
-        
       end
     end
   end
@@ -75,16 +72,16 @@ class AppointmentsController < ApplicationController
         @appointment.destroy
         format.html { redirect_to appointments_url, notice: 'Reserva cancelada com sucesso.' }
         format.json { head :no_content }
-        format.js { render home_system_path, :locals => { msg: 'destroy_success'} }
+        format.js { render home_system_path, locals: { msg: 'destroy_success'} }
       else
         format.html { redirect_to appointments_url, notice: 'Houve um erro ao cancelar a reserva.' }
-        format.js { render home_show_message_path, :locals => { msg: 'destroy_error'} }
+        format.js { render home_show_message_path, locals: { msg: 'destroy_error'} }
       end
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+  # Use callbacks to share common setup or constraints between actions.
   def set_appointment
     @appointment = Appointment.find(params[:id])
   end
@@ -96,18 +93,24 @@ class AppointmentsController < ApplicationController
 
   def free_to_edit
     # cond1 refere-se a quem pode editar a reserva
-    @appointment.user != current_user ? cond1 = false : cond1 = true
+    cond1 = @appointment.user == current_user
     # cond2 refere-se a reserva só poder ser editada-antes de sua data acontecer
-    @appointment.day.past? ? cond2 = false : cond2 = true
-    p cond1 && cond2 ? @letty = true : @letty = false
+    cond2 = @appointment.day.past?
+    @letty = cond1 && cond2
   end
 
   def free_to_delete
     # cond1 refere-se a quem pode deletar a reserva
-    @appointment.user != current_user ? cond1 = false : cond1 = true
+    cond1 = @appointment.user == current_user
     # cond2 refere-se a reserva só poder ser deletada-antes de sua data acontecer
-    @appointment.day.to_date.past? ? cond2 = false : cond2 = true
-    cond1 && cond2 ? @letty = true : @letty = false
+    cond2 = @appointment.day.to_date.past?
+    @letty = cond1 && cond2
   end
 
+  def free_range(obj)
+    reserva = Appointment.where(day: obj.day)
+    reserva.each do |day|
+      p "Dia : #{day.day} e Hora: #{day.hour} - Seu range é : #{day.range}"
+    end
+  end
 end

@@ -12,7 +12,7 @@ class Appointment < ApplicationRecord
   before_destroy :ownership, prepend: true do
     throw(:abort) if errors.present?
   end
-  
+
   def show_duration
     if duration == 1.0
       'Uma hora'
@@ -23,14 +23,30 @@ class Appointment < ApplicationRecord
     end
   end
 
+  def range
+    range = []
+    duration.to_i.times do |step|
+      range << parse_range(hour[0..1].to_i + step)
+    end
+    range << parse_range(range.last[0..1].to_i + 1)
+  end
+
+  def parse_range(num)
+    if num < 10
+      "0#{num}:00"
+    else
+      "#{num}:00"
+    end
+  end
+
   private
 
   def set_end_time
     if hour.nil? || duration.nil?
-      self.endtime =  nil
+      self.endtime = nil
     else
       t = hour[0..1].to_i + duration
-      t < 10 ?  self.endtime = "0#{t.to_i}:00" : self.endtime = "#{t.to_i}:00"
+      self.endtime = t < 10 ? "0#{t.to_i}:00" : "#{t.to_i}:00"
     end
     accepted_endtime
   end
@@ -41,7 +57,7 @@ class Appointment < ApplicationRecord
 
   def not_past
     if day.nil?
-      errors.add(:day, 'Impossível calcular a data como nil') 
+      errors.add(:day, 'Impossível calcular a data como nil')
       return
     end
     errors.add(:day, 'O dia da reserva não pode ser uma data no passado') if day.past?
@@ -49,8 +65,8 @@ class Appointment < ApplicationRecord
 
   def accepted_endtime
     if endtime.nil?
-       errors.add(:endtime, 'Impossível calcular a data como nil')
-       return
+      errors.add(:endtime, 'Impossível calcular a data como nil')
+      return
     end
     errors.add(:endtime, 'A hora final não pode ultrapassar meia noite') if endtime[0..1].to_i > 24
   end
