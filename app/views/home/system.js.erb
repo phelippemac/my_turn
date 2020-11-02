@@ -2,7 +2,7 @@
 //alert("Chegamos até aqui")
 $.ajax({
   type: 'GET',
-  url: "<%= home_system_url%>",
+  url: "<%= home_system_path %>",
 }).done(function() {
   
   $('#cadModal').modal('hide'); 
@@ -19,5 +19,6 @@ $.ajax({
         $.notify("Erro ao cancelar reserva", "error");
     "<% end %>"
     "<% rescue; end %>"
-    $('#calendar').html("<%= j render partial: 'partials/table' %>");
+    
 });
+$('#calendar').html("<%= j render partial: 'partials/table' %>");

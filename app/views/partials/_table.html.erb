@@ -12,19 +12,144 @@
         <tr>
           <td> <%="#{hour}"%></td>
           <td>
-            <%= render partial: 'partials/calculate', locals: {num: 0, hour: hour} %>
+            <% nothing = true%>
+            <% @collection.each do |col| %>
+              <% if col.first.day.strftime('%d/%m/%Y') ==  @dates[0] and col[1] == hour %>
+                Reservado para <%= col.first.user.name %>
+                <% if col.last.zero? %>
+                  <%= link_to home_view_path(id: col.first.id), {data: {toggle: 'modal', target: '#viewModal'}, remote: :true, method: :patch, class: 'btn btn-primary btn-sm'}  do %>
+                    <i class="fa fa-eye"></i>
+                  <% end %>
+                  <% if col.first.user == current_user%>
+                    <%= link_to col.first, method: :delete, data: { confirm: 'Tem Certeza?' }, class: 'btn btn-danger btn-sm', remote: :true  do %>
+                      <i class="fa fa-trash"></i>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <div class="btn btn-warning btn-sm">
+                    <i class="fa fa-arrow-up"></i>
+                  </div>
+                <% end %>
+                <% nothing = false%>
+              <% end %>
+            <% end %>
+            <% if nothing %>
+              <%= link_to home_link_path(date_to: @dates[0], hour_to: hour), remote: :true, method: :patch ,data: {toggle: 'modal', target: '#cadModal'}, class: 'btn btn-success' do %>
+                <i class="fa fa-plus"></i> Disponível
+              <% end %>
+            <% end %>
           </td>
           <td>
-            <%= render partial: 'partials/calculate', locals: {num: 1, hour: hour} %>
+            <% nothing = true%>
+            <% @collection.each do |col| %>
+              <% if col.first.day.strftime('%d/%m/%Y') ==  @dates[1] and col[1] == hour %>
+                Reservado para <%= col.first.user.name %>
+                <% if col.last.zero? %>
+                  <%= link_to home_view_path(id: col.first.id), {data: {toggle: 'modal', target: '#viewModal'}, remote: :true, method: :patch, class: 'btn btn-primary btn-sm'}  do %>
+                    <i class="fa fa-eye"></i>
+                  <% end %>
+                  <% if col.first.user == current_user%>
+                    <%= link_to col.first, method: :delete, data: { confirm: 'Tem Certeza?' }, class: 'btn btn-danger btn-sm', remote: :true  do %>
+                      <i class="fa fa-trash"></i>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <div class="btn btn-warning btn-sm">
+                    <i class="fa fa-arrow-up"></i>
+                  </div>
+                <% end %>
+                <% nothing = false%>
+              <% end %>
+            <% end %>
+            <% if nothing %>
+              <%= link_to home_link_path(date_to: @dates[1], hour_to: hour), remote: :true, method: :patch ,data: {toggle: 'modal', target: '#cadModal'}, class: 'btn btn-success' do %>
+                <i class="fa fa-plus"></i> Disponível
+              <% end %>
+            <% end %>
           </td>
           <td>
-            <%= render partial: 'partials/calculate', locals: {num: 2, hour: hour} %>
+            <% nothing = true%>
+            <% @collection.each do |col| %>
+              <% if col.first.day.strftime('%d/%m/%Y') ==  @dates[2] and col[1] == hour %>
+                Reservado para <%= col.first.user.name %>
+                <% if col.last.zero? %>
+                  <%= link_to home_view_path(id: col.first.id), {data: {toggle: 'modal', target: '#viewModal'}, remote: :true, method: :patch, class: 'btn btn-primary btn-sm'}  do %>
+                    <i class="fa fa-eye"></i>
+                  <% end %>
+                  <% if col.first.user == current_user%>
+                    <%= link_to col.first, method: :delete, data: { confirm: 'Tem Certeza?' }, class: 'btn btn-danger btn-sm', remote: :true  do %>
+                      <i class="fa fa-trash"></i>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <div class="btn btn-warning btn-sm">
+                    <i class="fa fa-arrow-up"></i>
+                  </div>
+                <% end %>
+                <% nothing = false%>
+              <% end %>
+            <% end %>
+            <% if nothing %>
+              <%= link_to home_link_path(date_to: @dates[2], hour_to: hour), remote: :true, method: :patch ,data: {toggle: 'modal', target: '#cadModal'}, class: 'btn btn-success' do %>
+                <i class="fa fa-plus"></i> Disponível
+              <% end %>
+            <% end %>
           </td>
           <td>
-            <%= render partial: 'partials/calculate', locals: {num: 3, hour: hour} %>
+            <% nothing = true%>
+            <% @collection.each do |col| %>
+              <% if col.first.day.strftime('%d/%m/%Y') ==  @dates[3] and col[1] == hour %>
+                Reservado para <%= col.first.user.name %>
+                <% if col.last.zero? %>
+                  <%= link_to home_view_path(id: col.first.id), {data: {toggle: 'modal', target: '#viewModal'}, remote: :true, method: :patch, class: 'btn btn-primary btn-sm'}  do %>
+                    <i class="fa fa-eye"></i>
+                  <% end %>
+                  <% if col.first.user == current_user%>
+                    <%= link_to col.first, method: :delete, data: { confirm: 'Tem Certeza?' }, class: 'btn btn-danger btn-sm', remote: :true  do %>
+                      <i class="fa fa-trash"></i>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <div class="btn btn-warning btn-sm">
+                    <i class="fa fa-arrow-up"></i>
+                  </div>
+                <% end %>
+                <% nothing = false%>
+              <% end %>
+            <% end %>
+            <% if nothing %>
+              <%= link_to home_link_path(date_to: @dates[3], hour_to: hour), remote: :true, method: :patch ,data: {toggle: 'modal', target: '#cadModal'}, class: 'btn btn-success' do %>
+                <i class="fa fa-plus"></i> Disponível
+              <% end %>
+            <% end %>
           </td>
           <td>
-            <%= render partial: 'partials/calculate', locals: {num: 4, hour: hour} %>
+            <% nothing = true%>
+            <% @collection.each do |col| %>
+              <% if col.first.day.strftime('%d/%m/%Y') ==  @dates[4] and col[1] == hour %>
+                Reservado para <%= col.first.user.name %>
+                <% if col.last.zero? %>
+                  <%= link_to home_view_path(id: col.first.id), {data: {toggle: 'modal', target: '#viewModal'}, remote: :true, method: :patch, class: 'btn btn-primary btn-sm'}  do %>
+                    <i class="fa fa-eye"></i>
+                  <% end %>
+                  <% if col.first.user == current_user%>
+                    <%= link_to col.first, method: :delete, data: { confirm: 'Tem Certeza?' }, class: 'btn btn-danger btn-sm', remote: :true  do %>
+                      <i class="fa fa-trash"></i>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <div class="btn btn-warning btn-sm">
+                    <i class="fa fa-arrow-up"></i>
+                  </div>
+                <% end %>
+                <% nothing = false%>
+              <% end %>
+            <% end %>
+            <% if nothing %>
+              <%= link_to home_link_path(date_to: @dates[4], hour_to: hour), remote: :true, method: :patch ,data: {toggle: 'modal', target: '#cadModal'}, class: 'btn btn-success' do %>
+                <i class="fa fa-plus"></i> Disponível
+              <% end %>
+            <% end %>
           </td>
         </tr>
       <% end %>
