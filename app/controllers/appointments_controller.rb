@@ -32,6 +32,7 @@ class AppointmentsController < ApplicationController
       respond_to do |format|
         system
         if @appointment.save
+          p "FOIIIIIIIIIIIIIIIII SALVOOO"
           format.html {}
           format.json { render :show, status: :created, location: @appointment }
           format.js { render home_system_path, locals: {msg: 'reserva_success'} }

@@ -14,6 +14,8 @@ class Appointment < ApplicationRecord
     throw(:abort) if errors.present?
   end
 
+  scope :in_range, ->(x) { where('day BETWEEN ? AND ?', x, x + 7.day) }
+
   def show_duration
     if duration == 1.0
       'Uma hora'

@@ -16,7 +16,7 @@
   <div class="row">
     <div class="col-sm-12 col-lg-12">
       <%= form_tag home_system_path, method: :get, remote: :true do %>
-        <%= date_field_tag :new_day, value: Time.now, class: 'date-field' %>
+        <%= date_field_tag :new_day, class: 'date-field' %>
         <%= submit_tag 'Mostrar', class: 'btn btn-success link-field' %>
       <% end %>
     </div>

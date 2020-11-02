@@ -1,22 +1,23 @@
-$('#cadModal').modal('hide'); 
-"<% begin %>"
-"<% if msg == 'reserva_success' %>"
-    $.notify("Reserva criada com sucesso", "success");
-"<% elsif msg == 'reserva_error' %>"
-    $.notify("Erro ao criar reserva", "error");
-"<% elsif msg == 'destroy_success' %>"
-    $.notify("Reserva cancelada com sucesso", "success");
-"<% elsif msg == 'destroy_error' %>"
-    $.notify("Erro ao cancelar reserva", "error");
-"<% end %>"
-"<% rescue %>"
 
-"<% end %>"
+//alert("Chegamos até aqui")
+$.ajax({
+  type: 'GET',
+  url: "<%= home_system_url%>",
+}).done(function() {
+  
+  $('#cadModal').modal('hide'); 
+    var dateBase = $('input[type=hidden]').val();
 
-var dateBase = $('input[type=hidden]').val();
-$('#calendar').html("<%= j render partial: 'partials/table' %>");
-/*$.get('/home/system', { new_day: dateBase}, 
-    function(returnedData){
-        $('#calendar').html("<%= j render partial: 'partials/table' %>");
-});*/
-
+    "<% begin %>"
+    "<% if msg == 'reserva_success' %>"
+        $.notify("Reserva criada com sucesso", "success");
+    "<% elsif msg == 'reserva_error' %>"
+        $.notify("Erro ao criar reserva", "error");
+    "<% elsif msg == 'destroy_success' %>"
+        $.notify("Reserva cancelada com sucesso", "success");
+    "<% elsif msg == 'destroy_error' %>"
+        $.notify("Erro ao cancelar reserva", "error");
+    "<% end %>"
+    "<% rescue; end %>"
+    $('#calendar').html("<%= j render partial: 'partials/table' %>");
+});

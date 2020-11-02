@@ -12,13 +12,14 @@ class ApplicationController < ActionController::Base
     @initial_period = config.initial_period.to_f
     @last_period = config.last_period.to_f
     @weekdays = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"]
-    @reservations = Appointment.all
-
+    
     if params[:new_day].present? && ! params[:new_day].blank?
       @today = params[:new_day].to_date
     else
       @today = Time.current.strftime('%d/%m/%Y').to_date
     end
+    @reservations = Appointment.in_range(@today)
+    mount_table(@reservations)
     if @today.monday? || @today.sunday? || @today.saturday?
       rotate = 0
     elsif @today.tuesday?
@@ -57,4 +58,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def mount_table(res)
+    @collection = []
+    res.each do |x|
+      x.range.each_with_index do |item, ind|
+        @collection << [x, item, ind]
+      end
+    end
+    @collection
+  end
 end

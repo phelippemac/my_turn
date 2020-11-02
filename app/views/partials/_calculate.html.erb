@@ -1,0 +1,26 @@
+<% nothing = true%>
+<% @collection.each do |col| %>
+  <% if col.first.day.strftime('%d/%m/%Y') ==  @dates[num] and col[1] == hour %>
+    Reservado para <%= col.first.user.name %>
+    <% if col.last.zero? %>
+      <%= link_to home_view_path(id: col.first.id), {data: {toggle: 'modal', target: '#viewModal'}, remote: :true, method: :patch, class: 'btn btn-primary btn-sm'}  do %>
+        <i class="fa fa-eye"></i>
+      <% end %>
+      <% if col.first.user == current_user%>
+        <%= link_to col.first, method: :delete, data: { confirm: 'Tem Certeza?' }, class: 'btn btn-danger btn-sm', remote: :true  do %>
+          <i class="fa fa-trash"></i>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= link_to '', class: 'btn btn-warning btn-sm', remote: :true  do %>
+        <i class="fa fa-arrow-up"></i>
+      <% end %>
+    <% end %>
+    <% nothing = false%>
+  <% end %>
+<% end %>
+<% if nothing %>
+  <%= link_to home_link_path(date_to: @dates[num], hour_to: hour), remote: :true, method: :patch ,data: {toggle: 'modal', target: '#cadModal'}, class: 'btn btn-success' do %>
+    <i class="fa fa-plus"></i> Disponível
+  <% end %>
+<% end %>
