@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/index'
   get 'home/system'
-  patch 'home/link'
-  patch 'home/view'
-  patch 'home/edit'
+  patch 'home/link', defaults: { format: 'js' }
+  patch 'home/view', defaults: { format: 'js' }
+  patch 'home/edit', defaults: { format: 'js' }
   patch 'home/show_message', to: 'home#show_message'
   resources :bases
   resources :settings

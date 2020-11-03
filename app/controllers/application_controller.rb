@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
 
-  private 
     def system
     user = current_user
     @name = user.name
@@ -15,6 +14,7 @@ class ApplicationController < ActionController::Base
     
     if params[:new_day].present? && ! params[:new_day].blank?
       @today = params[:new_day].to_date
+      p "Recebemooos o Parametro"
     else
       @today = Time.current.strftime('%d/%m/%Y').to_date
     end
@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
     @period = []
     i = @initial_period
     while i <= @last_period
-      i - i.to_i == 0 ? f = "00" :  f = "30"
+      f = i - i.to_i == 0 ? '00' : '30'
       if i < 10
         @period << "0#{i.to_i}:#{f}"
       else

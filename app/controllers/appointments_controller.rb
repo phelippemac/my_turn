@@ -29,15 +29,15 @@ class AppointmentsController < ApplicationController
       format.js { redirect_to home_system_path, notice: 'A reserva não pode ser feita com data passada'}
     else
       respond_to do |format|
-        system
         if @appointment.save
+          system
           format.html {}
           format.json { render :show, status: :created, location: @appointment }
-          format.js { render home_system_path, locals: {msg: 'reserva_success'} }
+          format.js { render home_system_path, locals: {msg: 'reserva_success'}, :layout => false }
         else
           format.html { render :new }
           format.json { render json: @appointment.errors, status: :unprocessable_entity }
-          format.js { render home_system_path, locals: {msg: 'reserva_error'} }
+          format.js { render js: "$.notify('#{@appointment.errors.messages.first}', \"error\");" }
         end
       end
     end
@@ -48,13 +48,13 @@ class AppointmentsController < ApplicationController
   def update
     @appointment.current_user = current_user
     respond_to do |format|
-      system
       if @appointment.update(appointment_params)
+        system
         format.html { redirect_to home_system_path, notice: 'Houve um erro ao editar a reserva' }
-        format.js { render home_system_path, locals: {msg: 'edit_success'} }
+        format.js { render home_system_path, locals: {msg: 'edit_success'}, :layout => false }
       else 
         format.html { redirect_to @appointment, notice: 'Reserva realizada com sucesso' }
-        format.js { render home_system_path, locals: {msg: 'edit_error'} }
+        format.js { render js: "$.notify('#{@appointment.errors.messages.first}', \"error\");" }
       end
     end
   end
@@ -64,13 +64,14 @@ class AppointmentsController < ApplicationController
   def destroy
     @appointment.current_user = current_user
     respond_to do |format|
-      system
       if @appointment.destroy
+        system
         format.html { redirect_to appointments_url, notice: 'Reserva cancelada com sucesso.' }
-        format.js { render home_system_path, locals: { msg: 'destroy_success'} }
+        format.js { render home_system_path, locals: { msg: 'destroy_success'},:layout => false }
       else
         format.html { redirect_to appointments_url, notice: 'Houve um erro ao cancelar a reserva.' }
-        format.js { render home_system_path, locals: { msg: 'destroy_error'} }
+        p @appointment.errors.messages
+        format.js { render js: "$.notify('#{@appointment.errors.messages.first}', \"error\");" }
       end
     end
   end

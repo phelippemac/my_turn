@@ -1,9 +1,9 @@
-<% nothing = true%>
+<% nothing = true %>
 <% @collection.each do |col| %>
   <% if col.first.day.strftime('%d/%m/%Y') ==  @dates[num] and col[1] == hour %>
     Reservado para <%= col.first.user.name %>
     <% if col.last.zero? %>
-      <%= link_to home_view_path(id: col.first.id), {data: {toggle: 'modal', target: '#viewModal'}, remote: :true, method: :patch, class: 'btn btn-primary btn-sm'}  do %>
+      <%= link_to home_view_path(id: col.first.id), {data: {toggle: 'modal', target: '#viewModal'} , remote: :true, method: :patch, class: 'btn btn-primary btn-sm'}  do %>
         <i class="fa fa-eye"></i>
       <% end %>
       <% if col.first.user == current_user%>

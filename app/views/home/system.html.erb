@@ -16,7 +16,7 @@
   <div class="row">
     <div class="col-sm-12 col-lg-12">
       <%= form_tag home_system_path, method: :get, remote: :true do %>
-        <%= date_field_tag :new_day, class: 'date-field' %>
+        <%= date_field_tag :new_day, value: Time.current, class: 'date-field' %>
         <%= submit_tag 'Mostrar', class: 'btn btn-success link-field' %>
       <% end %>
     </div>
@@ -58,7 +58,7 @@
         </button>
       </div>
       <div class="modal-body" id="d-view">
-        <%= render partial: 'partials/table' %>
+      
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

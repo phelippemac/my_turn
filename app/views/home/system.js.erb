@@ -1,14 +1,14 @@
-
-//alert("Chegamos até aqui")
-/*$.ajax({
+var dateBase = $('input[type=hidden]').val();
+$('#cadModal').modal('hide'); 
+$.ajax({
   type: 'GET',
   url: "<%= home_system_path %>",
+  data: {new_day: dateBase},
 }).done(function() {
-  
-});*/
-$('#cadModal').modal('hide'); 
-$('#calendar').html("<%= j render partial: 'partials/table' %>");
-    //var dateBase = $('input[type=hidden]').val();
+  $('#calendar').html("<%= j render partial: 'partials/table' %>");
+});
+
+
 "<% begin %>"
 "<% if msg == 'reserva_success' %>"
     $.notify("Reserva criada com sucesso", "success");

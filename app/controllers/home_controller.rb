@@ -6,6 +6,10 @@ class HomeController < ApplicationController
 
   def system
     super
+    respond_to do |format|
+      format.html {}
+      format.js { render '/home/system.js.erb', layout: false }
+    end
   end
 
   def link
@@ -16,7 +20,6 @@ class HomeController < ApplicationController
     else
       @partial = 'partials/form'
     end
-
     respond_to do |format|
       format.js
     end

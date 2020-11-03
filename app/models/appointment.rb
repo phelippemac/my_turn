@@ -66,7 +66,7 @@ class Appointment < ApplicationRecord
       errors.add(:day, 'Impossível calcular a data como nil')
       return
     end
-    errors.add(:day, 'O dia da reserva não pode ser uma data no passado') if day.past?
+    errors.add(:day, 'A criação, edição e cancelamento de uma reserva não pode ocorrer com data passada') if day.past?
   end
 
   def accepted_endtime
