@@ -43,7 +43,7 @@ class SettingsController < ApplicationController
   def update
     respond_to do |format|
       if @setting.update(setting_params)
-        format.html { redirect_to @setting, notice: 'Setting was successfully updated.' }
+        format.html { redirect_to settings_path, notice: 'Setting was successfully updated.' }
         format.json { render :show, status: :ok, location: @setting }
       else
         format.html { render :edit }
@@ -63,6 +63,7 @@ class SettingsController < ApplicationController
   end
 
   def alteration
+    @setting = Setting.first
     respond_to do |format|
       format.js
     end
@@ -76,6 +77,6 @@ class SettingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def setting_params
-      params.require(:setting).permit(:interval, :max_usage, :initial_period, :last_period)
+      params.permit(:interval, :max_usage, :initial_period, :last_period)
     end
 end
