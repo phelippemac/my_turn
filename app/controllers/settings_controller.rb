@@ -1,7 +1,7 @@
 class SettingsController < ApplicationController
   before_action :set_setting, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-
+  before_action :authenticate_permiss
   # GET /settings
   # GET /settings.json
   def index
@@ -59,6 +59,12 @@ class SettingsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to settings_url, notice: 'Setting was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def alteration
+    respond_to do |format|
+      format.js
     end
   end
 

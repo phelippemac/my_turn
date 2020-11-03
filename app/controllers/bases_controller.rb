@@ -1,6 +1,7 @@
 class BasesController < ApplicationController
   before_action :set_basis, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :authenticate_permiss
 
   # GET /bases
   # GET /bases.json

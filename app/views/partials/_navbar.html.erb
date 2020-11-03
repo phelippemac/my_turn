@@ -6,7 +6,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Reservas <span class="sr-only">(current)</span></a>
+        <%= link_to 'Reservas', home_system_path, class: 'nav-link' %>
       </li>
       <li class="nav-item">
         <%= link_to 'Logoff', destroy_user_session_path, method: :delete, class: 'nav-link' %>

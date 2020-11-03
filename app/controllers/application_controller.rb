@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
     
     if params[:new_day].present? && ! params[:new_day].blank?
       @today = params[:new_day].to_date
-      p "Recebemooos o Parametro"
     else
       @today = Time.current.strftime('%d/%m/%Y').to_date
     end
@@ -66,5 +65,13 @@ class ApplicationController < ActionController::Base
       end
     end
     @collection
+  end
+
+  private
+
+  def authenticate_permiss
+    if current_user.normal?
+      redirect_to home_system_path
+    end
   end
 end
