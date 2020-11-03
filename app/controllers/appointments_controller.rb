@@ -1,8 +1,7 @@
 class AppointmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
-  before_action :free_to_edit, only: [:update]
-  before_action :free_to_delete, only: [:destroy]
+
 
   # GET /appointments
   # GET /appointments.json
@@ -49,14 +48,13 @@ class AppointmentsController < ApplicationController
   def update
     @appointment.current_user = current_user
     respond_to do |format|
-      if @letty == false
+      system
+      if @appointment.update(appointment_params)
         format.html { redirect_to home_system_path, notice: 'Houve um erro ao editar a reserva' }
-        format.js { render js: '$("#cadModal").modal("hide"); $.notify("Erro ao editar reserva", "error");' }
+        format.js { render home_system_path, locals: {msg: 'edit_success'} }
       else 
-        @appointment.update(appointment_params)
         format.html { redirect_to @appointment, notice: 'Reserva realizada com sucesso' }
-        format.json { render :show, status: :ok, location: @appointment }
-        format.js { render js: '$("#cadModal").modal("hide"); $.notify("Edição concluida com sucesso", "success");' }
+        format.js { render home_system_path, locals: {msg: 'edit_error'} }
       end
     end
   end
@@ -67,14 +65,12 @@ class AppointmentsController < ApplicationController
     @appointment.current_user = current_user
     respond_to do |format|
       system
-      if @letty == true
-        @appointment.destroy
+      if @appointment.destroy
         format.html { redirect_to appointments_url, notice: 'Reserva cancelada com sucesso.' }
-        format.json { head :no_content }
         format.js { render home_system_path, locals: { msg: 'destroy_success'} }
       else
         format.html { redirect_to appointments_url, notice: 'Houve um erro ao cancelar a reserva.' }
-        format.js { render home_show_message_path, locals: { msg: 'destroy_error'} }
+        format.js { render home_system_path, locals: { msg: 'destroy_error'} }
       end
     end
   end
@@ -89,30 +85,4 @@ class AppointmentsController < ApplicationController
   def appointment_params
     params.permit(:day, :hour, :duration, :description, :user_id)
   end
-
-  def free_to_edit
-    # cond1 refere-se a quem pode editar a reserva
-    cond1 = @appointment.user == current_user
-    # cond2 refere-se a reserva só poder ser editada-antes de sua data acontecer
-    cond2 = !@appointment.day.past?
-    @letty = cond1 && cond2
-  end
-
-  def free_to_delete
-    # cond1 refere-se a quem pode deletar a reserva
-    cond1 = @appointment.user == current_user
-    # cond2 refere-se a reserva só poder ser deletada-antes de sua data acontecer
-    cond2 = !@appointment.day.to_date.past?
-    @letty = cond1 && cond2
-  end
-
-  #def free_range(obj)
-  #  reserva = Appointment.where(day: obj.day)
-  #  restrict = 0
-  #  reserva.each do |day|
-  #    restrict += 1 if day.range.include?(obj.hour)
-  #  end
-  # @letty = restrict.zero?
-  #end
-
 end

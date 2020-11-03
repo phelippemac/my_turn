@@ -12,6 +12,8 @@ module MeetingRoom
     config.load_defaults 6.0
 
     config.i18n.default_locale = :'pt-BR'
+    config.active_record.default_timezone = :local
+    config.time_zone = 'Brasilia'
 
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'local_env.yml')

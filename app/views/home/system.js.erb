@@ -18,5 +18,9 @@ $('#calendar').html("<%= j render partial: 'partials/table' %>");
     $.notify("Reserva cancelada com sucesso", "success");
 "<% elsif msg == 'destroy_error' %>"
     $.notify("Erro ao cancelar reserva", "error");
+"<% elsif msg == 'edit_success' %>"
+    $.notify("Edição concluida com sucesso", "success");
+"<% elsif msg == 'edit_error' %>"
+    $.notify("Erro ao editar reserva", "error");
 "<% end %>"
 "<% rescue; end %>"

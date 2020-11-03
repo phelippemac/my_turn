@@ -13,6 +13,9 @@ class Appointment < ApplicationRecord
   before_destroy :ownership, prepend: true do
     throw(:abort) if errors.present?
   end
+  before_destroy :not_past, prepend: true do
+    throw(:abort) if errors.present?
+  end
 
   scope :in_range, ->(x) { where('day BETWEEN ? AND ?', x, x + 7.day) }
 

@@ -182,7 +182,7 @@ RSpec.describe Appointment, type: :model do
       reserva = create_appointment(DATA_PRESENTE)
       reserva.current_user = reserva.user
       reserva.save!
-      expect{ reserva.destroy }.to change(Appointment, :count).by(-1)
+      expect{ reserva.destroy! }.to change(Appointment, :count).by(-1)
     end
 
     it 'A exclusão da reserva não pode ser feita por outro usuário senão aquele que a criou' do
