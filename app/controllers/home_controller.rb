@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
  
   before_action :authenticate_user!, except: :index
+  before_action :get_durations
   
   def index; end
 
@@ -40,6 +41,23 @@ class HomeController < ApplicationController
     @res = Appointment.find(params[:id])
     respond_to do |format|
       format.js
+    end
+  end
+
+  private
+
+  def get_durations
+    @durations = []
+    case Setting.first.max_usage.to_i
+    when 1
+      @durations << ['Uma hora', 1.0]
+    when 2
+      @durations << ['Uma hora', 1.0]
+      @durations << ['Duas Horas', 2.0]
+    when 3
+      @durations << ['Uma hora', 1.0]
+      @durations << ['Duas Horas', 2.0]
+      @durations << ['Três Horas', 3.0]
     end
   end
 end

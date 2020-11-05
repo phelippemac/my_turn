@@ -25,7 +25,7 @@ RSpec.describe HomeController, type: :controller do
 
   context 'Valores do System' do
     before(:each) do
-      Setting.create # A página renderizada precisa das variáveis de pelo menos uma configuração
+      Setting.create!(max_usage: 1.0, initial_period: '00:00', last_period: '22:00') # A página renderizada precisa das variáveis de pelo menos uma configuração
       user = User.create(name: 'João', email: 'joao@gmail.com', password: '123', password_confirmation: '123')
       sign_in user
     end

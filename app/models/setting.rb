@@ -14,7 +14,7 @@ class Setting < ApplicationRecord
     when 1.0
       'A reserva pode ser feita por no máximo uma hora'
     when 2.0
-      'A reserva pode ser feita por no máximo duas horaa'
+      'A reserva pode ser feita por no máximo duas horas'
     when 3.0
       'A reserva pode ser feita por no máximo três horas'
     end

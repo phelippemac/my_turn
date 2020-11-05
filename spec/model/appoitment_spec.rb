@@ -21,6 +21,7 @@ RSpec.describe Appointment, type: :model do
   before(:each) do
     User.create!(name: 'João', email: 'joao@gmail.com', password: '123456', password_confirmation: '123456')
     User.create!(name: 'Phelippe', email: 'phelippe@gmail.com', password: '123456', password_confirmation: '123456')
+    Setting.create!(max_usage: 1.0, initial_period: '06:00', last_period: '18:00')
   end
 
   context 'Referente a criação' do
@@ -157,6 +158,16 @@ RSpec.describe Appointment, type: :model do
       reserva.duration = 2.0
       reserva.user = User.last
 
+      expect(reserva.save).to eq(false)
+    end
+
+    it 'A criação da reserva deve estar entro o intervalo das configurações' do
+      reserva = Appointment.new
+      reserva.day = DATA_PASSADA
+      reserva.hour = '04:00'
+      reserva.description = 'Descrição'
+      reserva.duration = 1.0
+      reserva.user = User.last
       expect(reserva.save).to eq(false)
     end
   end
