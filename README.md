@@ -40,7 +40,7 @@ Comece clonando este repositório e entrando no diretório criado.
 
 ```bash
 $ git clone https://github.com/phelippemac/my_turn.git
-$ cd rails-note
+$ cd my_turn
 ```
 
 Abra com seu editor de texto favorito e edite o arquivo em *./config* chamado *local_env.yml* com o seguinte conteúdo:
